@@ -1,0 +1,35 @@
+extends ./layout/index
+
+block contenido
+    main.container.mt-5
+        h1.text-center.mt-5 #{pagina}
+        
+        include layout/bloque_testimoniales
+
+
+        .row 
+            .col-md-12
+
+                h2.d-block.w-100.text-center Agrega un testimonial
+
+                if(errores)
+                    each error in errores 
+                        .alert.col.alert-danger.text-center= error.mensaje
+
+            .row.justify-content-center.col
+                .col-md-8 
+                    form(action='/testimoniales' method='POST')
+                        .form-group 
+
+                            label.ml-2(for='nombre') Nombre
+                            input#nombre(type='text', placeholder='Tu nombre', name='nombre', class='form-control', value= nombre)
+                            
+                            label.ml-2.mt-2(for='correo') E-mail
+                            input#correo(type='email', placeholder='Tu e-mail', name='email', class='form-control', value= email)
+                            
+                            label.ml-2.mt-2(for='mensaje') Reseña
+                            textarea#mensaje(class='form-control', name='mensaje', placeholder='Tu reseña', rows=3)= mensaje
+
+                        input.btn.btn-success.btn-block(type='submit')
+                            
+
